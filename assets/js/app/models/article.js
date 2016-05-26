@@ -1,5 +1,5 @@
 App.ArticleAdapter = DS.RESTAdapter.extend({
-  host: 'http://localhost:1337',
+  host: 'http://tester.approveit.biz',
   primaryKey: 'id',
   pathForType: function(type) {
     var camelized = Ember.String.camelize(type);
