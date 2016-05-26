@@ -1,5 +1,5 @@
 App.ArticleAdapter = DS.RESTAdapter.extend({
-  host: 'http://tester.approveit.biz',
+  host: 'http://ember.approveit.biz',
   primaryKey: 'id',
   pathForType: function(type) {
     var camelized = Ember.String.camelize(type);
@@ -50,7 +50,7 @@ App.ArticleSerializer = DS.RESTSerializer.extend({
     return obj;
   },
   normalizeSaveResponse: function(store, primaryModelClass, payload, id, requestType){
-    console.log('ÑAN', payload.body)
+
     var obj = {
       data: {
         type : primaryModelClass.modelName,
