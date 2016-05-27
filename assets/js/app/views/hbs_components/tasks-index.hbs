@@ -1,0 +1,4 @@
+<h2>Article List</h2>
+{{#each model as |task|}}
+  <p>{{formatDate task}} {{#link-to 'app.tasks.task' task}}{{task.title}}{{/link-to}}</p>
+{{/each}}

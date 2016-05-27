@@ -1,0 +1,1 @@
+Ember.TEMPLATES["app"] = Ember.HTMLBars.compile('{{#link-to \'app.articles\'}} Lista de Articulos {{/link-to}}{{#link-to \'app.articles.create\'}} Crear artículo {{/link-to}}{{outlet}}');

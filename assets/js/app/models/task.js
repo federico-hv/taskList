@@ -1,5 +1,5 @@
-App.ArticleAdapter = DS.RESTAdapter.extend({
-  host: 'http://ember.approveit.biz',
+App.TaskAdapter = DS.RESTAdapter.extend({
+  host: 'http://localhost:1337',
   primaryKey: 'id',
   pathForType: function(type) {
     var camelized = Ember.String.camelize(type);
@@ -8,30 +8,30 @@ App.ArticleAdapter = DS.RESTAdapter.extend({
   loadSaveResponse: true
 });
 
-App.ArticleSerializer = DS.RESTSerializer.extend({
-  // Used in /app/articles
+App.TaskSerializer = DS.RESTSerializer.extend({
+  // Used in /app/tasks
   normalizeFindAllResponse(store, primaryModelClass, payload, id, requestType){
-    var normalizedArticles = payload.map(function(article){
+    var normalizedTasks = payload.map(function(task){
       return {
         type: primaryModelClass.modelName,
-        id: article.id,
+        id: task.id,
         attributes: {
-          title: article.title,
-          body: article.body,
-          createdAt: article.createdAt,
-          updatedAt: article.updatedAt
+          title: task.title,
+          body: task.body,
+          createdAt: task.createdAt,
+          updatedAt: task.updatedAt
         }
       };
     });
 
     var obj = {
-      data: normalizedArticles
+      data: normalizedTasks
     };
 
     return obj;
 
   },
-  // Used in /app/articles/:id
+  // Used in /app/tasks/:id
   normalizeFindRecordResponse(store, primaryModelClass, payload, id, requestType) {
 
     var obj = {
@@ -50,14 +50,13 @@ App.ArticleSerializer = DS.RESTSerializer.extend({
     return obj;
   },
   normalizeSaveResponse: function(store, primaryModelClass, payload, id, requestType){
-
     var obj = {
       data: {
         type : primaryModelClass.modelName,
         id   : payload.id,
         attributes: {
-          title: payload.title,
-          body : payload.body,
+          title    : payload.title,
+          body     : payload.body,
           createdAt: payload.createdAt,
           updatedAt: payload.updatedAt
         }
@@ -66,12 +65,12 @@ App.ArticleSerializer = DS.RESTSerializer.extend({
 
     return obj;
   },
-  // Used in /app/articles/create to eliminate json root "article"
+  // Used in /app/tasks/create to eliminate json root "task"
   serializeIntoHash: function(hash, type, record, options) {
     Ember.merge(hash, this.serialize(record, options));
   }
 
-  // // Used in /app/articles/create ????????
+  // // Used in /app/tasks/create ????????
   // serialize(snapshot, options){
   //   console.log('SERIALIZE')
   //   var json = this._super(snapshot, options);
@@ -84,9 +83,8 @@ App.ArticleSerializer = DS.RESTSerializer.extend({
 });
 
 
-App.Article = DS.Model.extend({
+App.Task = DS.Model.extend({
   title: DS.attr('string'),
   body: DS.attr('string'),
-  createdAt: DS.attr('date'),
-  updatedAt: DS.attr('date')
+  date: DS.attr('date')
 });

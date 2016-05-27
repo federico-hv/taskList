@@ -12,6 +12,9 @@ module.exports = {
      },
      body: {
        type: 'string'
+     },
+     date: {
+       type: 'date'
      }
    },
    beforeValidate: function(values, cb){

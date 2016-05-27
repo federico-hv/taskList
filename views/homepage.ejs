@@ -1,50 +1,144 @@
-<!-- App Root -->
-
 <script type="text/x-handlebars" id="app">
-  {{#link-to 'app.articles'}} Lista de Articulos {{/link-to}}
-  {{#link-to 'app.articles.create'}} Crear artículo {{/link-to}}
-  {{outlet}}
+
+    <header>
+
+      <div class="navbar-fixed">
+
+        <nav class="teal z-depth-2">
+          <div class="nav-wrapper">
+            <a id="menu" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li>{{#link-to 'app.main' class="waves-effect waves-light"}} Main {{/link-to}}</li>
+              <li>{{#link-to 'app.tasks' class="waves-effect waves-light"}} Tasks List {{/link-to}}</li>
+              <li>{{#link-to 'app.tasks.create' class="waves-effect waves-light"}} Create Task {{/link-to}}</li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+              <li>{{#link-to 'app.main' class="waves-effect waves-light"}} Main {{/link-to}}</li>
+              <li>{{#link-to 'app.tasks' class="waves-effect waves-light"}} Tasks List {{/link-to}}</li>
+              <li>{{#link-to 'app.tasks.create' class="waves-effect waves-light"}} Create Task {{/link-to}}</li>
+            </ul>
+          </div>
+        </nav>
+
+      </div>
+
+    </header>
+
+    <div class="container" style="background:#FFF;margin-top:15px;height:100%;overflow: hidden;">
+      {{outlet}}
+    </div>
+
+    <footer>
+    </footer>
+
+  </script>
+
+  <!-- Main -->
+  <script type="text/x-handlebars" id="app/main">
+    <div class="row" style="padding-top:70px;">
+      <div class="center-align">
+        <img src="http://colobu.com/images/logos/ember.png" alt="" class="responsive-img" style="height:190px;">
+      </div>
+
+        <div class="col s10 offset-s1 center-align" style="margin-top:30px;">
+          <div class="card teal darken-2 z-depth-3">
+            <h2 style="color:white;">
+                Sails/Ember Task List
+            </h2>
+          </div>
+        </div>
+    </div>
+  </script>
+
+  <!-- Task List -->
+
+  <script type="text/x-handlebars" id="app/tasks/index">
+    <div class="row" style="height: 100%;">
+        <div class="col s12 center-align">
+          <h2 style="color:#004d40;">
+            {{#if model}}
+              Task List
+            {{else}}
+              No current tasks
+            {{/if}}
+          </h2>
+        </div>
+
+
+      {{#each model as |task|}}
+          <div class="col s10 offset-s1 card hoverable">
+
+            <div class="col s12 m3 center-align" style="font-size:20px;height:60px;">{{formatDate task}}</div>
+            <div class="col s12 m6 center-align" style="font-size:20px;height:60px;">{{#link-to 'app.tasks.task' task}}{{task.title}}{{/link-to}}</div>
+            <div class="col s12 m3 center-align" style="height:60px;">
+              <a class="btn-floating btn-small waves-effect waves-light red lighten-2" {{action 'destroy' task}}>
+                <i class="tiny material-icons">delete</i>
+              </a>
+            </div>
+
+          </div>
+
+      {{/each}}
+
+    </div>
+  </script>
+
+
+  <!-- Task Detail -->
+
+  <script type="text/x-handlebars" id="app/tasks/task">
+
+    <div class="row">
+      <div class="col s12">
+        <h1 class="center-align" style="#00796b">Task</h1>
+      </div>
+      <div class="input-field col s10 push-s1" style="padding-bottom:30px;">
+        {{input type="text" value=model.title }}
+        <label for="title">Title</label>
+      </div>
+      <div class="input-field col s10 push-s1"  style="padding-bottom:30px;">
+        {{textarea value=model.body }}
+        <label for="description">Description</label>
+      </div>
+      <br>
+      <div class="col s6 center-align">
+        <button class="waves-effect waves-light btn red accent-2" {{action 'cancel'}}>Cancel</button>
+      </div>
+      <div class="col s6 center-align">
+        <button class="waves-effect waves-light btn" {{action 'update' model}}>Save</button>
+      </div>
+    </div>
+  </script>
+
+
+<!-- Task Create -->
+<script type="text/x-handlebars" id="app/tasks/create">
+
+  <div class="row">
+    <div class="col s12">
+      <h2 class="center-align" style="color:#00796b;">Create task</h2>
+    </div>
+    <div class="input-field col s10 push-s1" style="padding-bottom:30px;">
+      {{input type="text" value=title class="validate"}}
+      <label for="title">Title</label>
+    </div>
+    <div class="input-field col s10 push-s1"  style="padding-bottom:30px;">
+      {{textarea type="text" value=body class="materialize-textarea"}}
+      <label for="description">Description</label>
+    </div>
+    <div class="input-field col s10 push-s1"  style="padding-bottom:30px;">
+      <input type="date" class="datepicker">
+    </div>
+    <div class="col s6 center-align">
+      <button class="waves-effect waves-light btn red accent-2" {{action 'cancel'}}>Cancel</button>
+    </div>
+    <div class="col s6 center-align">
+      <button class="waves-effect waves-light btn" {{action 'create'}}>Save</button>
+    </div>
+  </div>
+
 </script>
 
-<!-- Main -->
-<script type="text/x-handlebars" id="app/main">
-  <h1>Welcome</h1>
-</script>
-
-<!-- Article List -->
-
-<script type="text/x-handlebars" id="app/articles/index">
-  <h2>Article List</h2>
-  {{#each model as |article|}}
-    <p>
-      {{formatDate article}}
-      {{#link-to 'app.articles.article' article}}{{article.title}}{{/link-to}}
-      <button {{action 'destroy' article}}>x</button>
-    </p>
-  {{/each}}
-</script>
-
-
-<!-- Article Detail -->
-
-<script type="text/x-handlebars" id="app/articles/article">
-  <h1>Article Detail</h1>
-  {{input type="text" value=model.title }}
-  {{textarea value=model.body }}
-  <br>
-  <button {{action 'update' model}}>Save</button>
-</script>
-
-
-<!-- Article Create -->
-<script type="text/x-handlebars" id="app/articles/create">
-  <h1>Create article</h1>
-  {{input type="text" value=title }}
-  <br>
-  {{textarea type="text" value=body }}
-  <br>
-  <button {{action 'create'}}>Save</button>
-</script>
 
 
 

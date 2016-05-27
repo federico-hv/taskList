@@ -1,12 +1,12 @@
-App.AppArticlesIndexController = Ember.Controller.extend({
+App.AppTasksIndexController = Ember.Controller.extend({
   actions: {
     destroy: function(model){
-      var article = model;
-      article.deleteRecord();
-      article
+      var task = model;
+      task.deleteRecord();
+      task
       .save()
       .then(function(){
-        console.log('Article Deleted')
+        console.log('Task Deleted')
       })
       .catch(function(err){
         console.log('Error: ', err);
@@ -16,13 +16,17 @@ App.AppArticlesIndexController = Ember.Controller.extend({
 });
 
 
-App.AppArticlesCreateController = Ember.Controller.extend({
+App.AppTasksCreateController = Ember.Controller.extend({
   title: '',
   body: '',
   actions: {
     create: function(){
       var ti = this.get('title');
       var bo = this.get('body');
+
+
+
+
       var that = this;
 
       /**
@@ -31,8 +35,8 @@ App.AppArticlesCreateController = Ember.Controller.extend({
        *
        **/
 
-      App.Article.loadSaveResponse = true;
-      this.store.createRecord('article', {
+      App.Task.loadSaveResponse = true;
+      this.store.createRecord('task', {
         title: ti,
         body : bo
       })
@@ -40,18 +44,23 @@ App.AppArticlesCreateController = Ember.Controller.extend({
       .then(function(){
         that.set('title', '');
         that.set('body', '');
-        that.transitionToRoute('app.articles');
+        that.transitionToRoute('app.tasks');
       })
       .catch(function(err){
         that.transitionToRoute('error');
       });
 
+    },
+    cancel: function(){
+      this.set('title', '');
+      this.set('body', '');
+      this.transitionToRoute('app.tasks');
     }
   }
 });
 
 
-App.AppArticlesArticleController = Ember.Controller.extend({
+App.AppTasksTaskController = Ember.Controller.extend({
   actions: {
     update: function(model){
 
@@ -60,11 +69,14 @@ App.AppArticlesArticleController = Ember.Controller.extend({
       model
       .save()
       .then(function(){
-        that.transitionToRoute('app.articles');
+        that.transitionToRoute('app.tasks');
       })
       .catch(function(err){
         that.transitionToRoute('error');
       });
+    },
+    cancel: function(){
+      this.transitionToRoute('app.tasks');
     }
   }
 })

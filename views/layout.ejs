@@ -5,6 +5,11 @@
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
     <script   src="https://code.jquery.com/jquery-2.2.4.js" crossorigin="anonymous"></script>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js" charset="utf-8"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ember.js/2.5.1/ember.js" charset="utf-8"></script>
@@ -39,7 +44,7 @@
     <!--STYLES END-->
   </head>
 
-  <body>
+  <body class="teal lighten-4">
     <%- body %>
 
 
@@ -97,10 +102,32 @@
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/app/app.js"></script>
     <script src="/js/app/router.js"></script>
-    <script src="/js/app/controllers/articles.js"></script>
+    <script src="/js/app/controllers/tasks.js"></script>
     <script src="/js/app/helpers/format-date.js"></script>
-    <script src="/js/app/models/article.js"></script>
-    <script src="/js/app/routes/articles.js"></script>
+    <script src="/js/app/models/task.js"></script>
+    <script src="/js/app/routes/tasks.js"></script>
     <!--SCRIPTS END-->
+
+
+
+    <!-- Materialize -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <script>
+      $(document).ready(function(){
+
+        $(".button-collapse").sideNav();
+
+        // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+        $('.side-nav > li').click(function(){
+          $(".button-collapse").sideNav('hide');
+        });
+
+        $('.datepicker').pickadate({
+          selectMonths: true, // Creates a dropdown to control month
+          selectYears: 15 // Creates a dropdown of 15 years to control year
+        });
+
+      });
+    </script>
   </body>
 </html>
