@@ -1,1 +1,0 @@
-Ember.TEMPLATES["articles/create"] = Ember.HTMLBars.compile('<h1>Create article</h1>{{input type=\"text\" value=title }}<br>{{textarea type=\"text\" value=body }}<br><button {{action \'create\'}}>Testing</button>');

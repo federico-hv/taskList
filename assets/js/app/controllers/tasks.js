@@ -19,12 +19,18 @@ App.AppTasksIndexController = Ember.Controller.extend({
 App.AppTasksCreateController = Ember.Controller.extend({
   title: '',
   body: '',
+  date: '',
   actions: {
     create: function(){
+
+      console.log('MESSAGE: ');
+      console.log(this.get('oneWay'));
+
       var ti = this.get('title');
       var bo = this.get('body');
+      var da = this.get('date');
 
-
+      debugger;
 
 
       var that = this;
@@ -38,12 +44,14 @@ App.AppTasksCreateController = Ember.Controller.extend({
       App.Task.loadSaveResponse = true;
       this.store.createRecord('task', {
         title: ti,
-        body : bo
+        body : bo,
+        date : da
       })
       .save()
       .then(function(){
         that.set('title', '');
         that.set('body', '');
+        that.set('date', '');
         that.transitionToRoute('app.tasks');
       })
       .catch(function(err){
@@ -54,6 +62,7 @@ App.AppTasksCreateController = Ember.Controller.extend({
     cancel: function(){
       this.set('title', '');
       this.set('body', '');
+      this.set('date', '');
       this.transitionToRoute('app.tasks');
     }
   }

@@ -1,1 +1,0 @@
-Ember.TEMPLATES["articles/index"] = Ember.HTMLBars.compile('<h2>Article List</h2>{{#each model as |article|}},<p>{{formatDate article}} {{#link-to \'app.articles.article\' article}}{{article.title}}{{/link-to}}</p>{{/each}}');

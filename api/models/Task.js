@@ -14,7 +14,7 @@ module.exports = {
        type: 'string'
      },
      date: {
-       type: 'date'
+       type: 'string'
      }
    },
    beforeValidate: function(values, cb){

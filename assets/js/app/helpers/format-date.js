@@ -7,9 +7,12 @@ Date.prototype.yyyymmdd = function() {
 };
 
 App.FormatDateHelper = Ember.Helper.helper(function(params){
-  var date = params[0].get('updatedAt');
+  var date = params[0].get('date');
+
   if(!date){
-    return new Date().yyyymmdd();
+    return 'No date assigned';
   }
-  return date.substring(0,10);
+
+  return date;
+
 });

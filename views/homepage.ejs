@@ -1,4 +1,6 @@
-<script type="text/x-handlebars" id="app">
+<!-- App Root -->
+
+  <script type="text/x-handlebars" id="app">
 
     <header>
 
@@ -6,17 +8,13 @@
 
         <nav class="teal z-depth-2">
           <div class="nav-wrapper">
-            <a id="menu" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-              <li>{{#link-to 'app.main' class="waves-effect waves-light"}} Main {{/link-to}}</li>
-              <li>{{#link-to 'app.tasks' class="waves-effect waves-light"}} Tasks List {{/link-to}}</li>
-              <li>{{#link-to 'app.tasks.create' class="waves-effect waves-light"}} Create Task {{/link-to}}</li>
+
+            <ul class="right">
+              <li>{{#link-to 'app.main' class="waves-effect waves-light"}}<i class="material-icons">home</i>{{/link-to}}</li>
+              <li>{{#link-to 'app.tasks' class="waves-effect waves-light"}}<i class="material-icons">list</i>{{/link-to}}</li>
+              <li>{{#link-to 'app.tasks.create' class="waves-effect waves-light"}}<i class="material-icons">mode_edit</i>{{/link-to}}</li>
             </ul>
-            <ul class="side-nav" id="mobile-demo">
-              <li>{{#link-to 'app.main' class="waves-effect waves-light"}} Main {{/link-to}}</li>
-              <li>{{#link-to 'app.tasks' class="waves-effect waves-light"}} Tasks List {{/link-to}}</li>
-              <li>{{#link-to 'app.tasks.create' class="waves-effect waves-light"}} Create Task {{/link-to}}</li>
-            </ul>
+
           </div>
         </nav>
 
@@ -24,7 +22,7 @@
 
     </header>
 
-    <div class="container" style="background:#FFF;margin-top:15px;height:100%;overflow: hidden;">
+    <div class="container" style="background:#FFF;margin-top:20px;height:120%;">
       {{outlet}}
     </div>
 
@@ -66,16 +64,35 @@
 
 
       {{#each model as |task|}}
-          <div class="col s10 offset-s1 card hoverable">
 
-            <div class="col s12 m3 center-align" style="font-size:20px;height:60px;">{{formatDate task}}</div>
-            <div class="col s12 m6 center-align" style="font-size:20px;height:60px;">{{#link-to 'app.tasks.task' task}}{{task.title}}{{/link-to}}</div>
-            <div class="col s12 m3 center-align" style="height:60px;">
-              <a class="btn-floating btn-small waves-effect waves-light red lighten-2" {{action 'destroy' task}}>
-                <i class="tiny material-icons">delete</i>
-              </a>
+          <div class="col s10 offset-s1 card">
+            <div class="row">
+
+              <div class="col s8">
+                <div class="row center-align">
+
+                  {{#link-to 'app.tasks.task' task}}
+                    <div class="col s12 m6" style="font-size:20px;padding-top:30px;">
+                      <span class="valign">{{task.title}}</span>
+                    </div>
+                  {{/link-to}}
+                  <div class="col s12 m6 center-align" style="font-size:20px;padding-top:30px;">
+                    <span class=""> {{formatDate task}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col s4">
+                <div class="row">
+                  <div class="col s12 center-align" style="height:60px;padding-top:30px;">
+                      <a class="btn-floating waves-effect waves-light red lighten-2 hoverable" {{action 'destroy' task}}>
+                        <i class="tiny material-icons">delete</i>
+                      </a>
+                  </div>
+                </div>
+              </div>
+
             </div>
-
           </div>
 
       {{/each}}
@@ -92,20 +109,29 @@
       <div class="col s12">
         <h1 class="center-align" style="#00796b">Task</h1>
       </div>
-      <div class="input-field col s10 push-s1" style="padding-bottom:30px;">
-        {{input type="text" value=model.title }}
-        <label for="title">Title</label>
+      <div class="input-field col s9 push-s1" style="padding-bottom:30px;">
+          <i class="material-icons prefix">mode_edit</i>
+          {{input id="ti_detail" type="text" value=model.title }}
+          {{#unless model.title}}
+            <label for="title">Title</label>
+          {{/unless}}
       </div>
-      <div class="input-field col s10 push-s1"  style="padding-bottom:30px;">
-        {{textarea value=model.body }}
-        <label for="description">Description</label>
+      <div class="input-field col s9 push-s1"  style="padding-bottom:30px;">
+        <i class="material-icons prefix">comment</i>
+        {{textarea id="desc_detail" value=model.body class="materialize-textarea"}}
+        {{#unless model.body}}
+          <label for="description">Description</label>
+        {{/unless}}
       </div>
-      <br>
+      <div class="input-field col s9 push-s1"  style="padding-bottom:30px;">
+        <i class="material-icons prefix">date_range</i>
+        {{input type="date" value=model.date class="datepicker"}}
+      </div>
       <div class="col s6 center-align">
-        <button class="waves-effect waves-light btn red accent-2" {{action 'cancel'}}>Cancel</button>
+        <button class="btn-floating btn-small waves-effect waves-light btn red accent-2 z-depth-5 hoverable" {{action 'cancel'}}><i class="material-icons">undo</i></button>
       </div>
       <div class="col s6 center-align">
-        <button class="waves-effect waves-light btn" {{action 'update' model}}>Save</button>
+        <button class="btn-floating btn-small waves-effect waves-light z-depth-5 hoverable" {{action 'update' model}}><i class="material-icons">save</i></button>
       </div>
     </div>
   </script>
@@ -118,22 +144,29 @@
     <div class="col s12">
       <h2 class="center-align" style="color:#00796b;">Create task</h2>
     </div>
-    <div class="input-field col s10 push-s1" style="padding-bottom:30px;">
-      {{input type="text" value=title class="validate"}}
-      <label for="title">Title</label>
+    <div class="input-field col s9 push-s1" style="padding-bottom:30px;">
+      <i class="material-icons prefix">title</i>
+      {{input id="title_create" type="text" value=title class="validate" max-length="20" }}
+      {{#unless title}}
+        <label for="title">Title</label>
+      {{/unless}}
     </div>
-    <div class="input-field col s10 push-s1"  style="padding-bottom:30px;">
-      {{textarea type="text" value=body class="materialize-textarea"}}
+    <div class="input-field col s9 push-s1"  style="padding-bottom:30px;">
+      <i class="material-icons prefix">description</i>
+      {{textarea id="description_create" type="text" value=body class="materialize-textarea" length="50" }}
+      {{#unless description}}
       <label for="description">Description</label>
+      {{/unless}}
     </div>
-    <div class="input-field col s10 push-s1"  style="padding-bottom:30px;">
-      <input type="date" class="datepicker">
+    <div class="input-field col s9 push-s1"  style="padding-bottom:30px;">
+      <i class="material-icons prefix">date_range</i>
+      {{input type="date" value=date class="datepicker" style="position: relative; z-index: 100000;"}}
     </div>
     <div class="col s6 center-align">
-      <button class="waves-effect waves-light btn red accent-2" {{action 'cancel'}}>Cancel</button>
+      <button class="btn-floating btn-small waves-effect waves-light btn red accent-2 z-depth-5 hoverable" {{action 'cancel'}}><i class="material-icons">delete</i></button>
     </div>
     <div class="col s6 center-align">
-      <button class="waves-effect waves-light btn" {{action 'create'}}>Save</button>
+      <button class="btn-floating btn-small waves-effect waves-light z-depth-5 hoverable" {{action 'create'}}><i class="material-icons">done</i></button>
     </div>
   </div>
 

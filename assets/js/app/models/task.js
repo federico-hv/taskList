@@ -1,5 +1,5 @@
 App.TaskAdapter = DS.RESTAdapter.extend({
-  host: 'http://ember.approveit.biz',
+  host: 'http://localhost:1337',
   primaryKey: 'id',
   pathForType: function(type) {
     var camelized = Ember.String.camelize(type);
@@ -85,6 +85,6 @@ App.TaskSerializer = DS.RESTSerializer.extend({
 
 App.Task = DS.Model.extend({
   title: DS.attr('string'),
-  body: DS.attr('string'),
-  date: DS.attr('date')
+  body : DS.attr('string'),
+  date : DS.attr('string')
 });

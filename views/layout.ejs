@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%=typeof title == 'undefined' ? 'New Sails App' : title%></title>
+    <title>Ember and Sails Testing</title>
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -10,7 +10,10 @@
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
 
-    <script   src="https://code.jquery.com/jquery-2.2.4.js" crossorigin="anonymous"></script>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.5.6/picker.js" charset="utf-8"></script>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.js" charset="utf-8"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ember.js/2.5.1/ember.js" charset="utf-8"></script>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/ember.js/2.5.1/ember.debug.js" charset="utf-8"></script>-->
@@ -40,7 +43,7 @@
     -->
 
     <!--STYLES-->
-    <!--<link rel="stylesheet" href="/styles/importer.css">-->
+    <link rel="stylesheet" href="/styles/importer.css">
     <!--STYLES END-->
   </head>
 
@@ -71,7 +74,7 @@
     -->
 
     <!--TEMPLATES-->
-
+    
     <!--TEMPLATES END-->
 
 
@@ -102,6 +105,7 @@
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/app/app.js"></script>
     <script src="/js/app/router.js"></script>
+    <script src="/js/app/controllers/app.js"></script>
     <script src="/js/app/controllers/tasks.js"></script>
     <script src="/js/app/helpers/format-date.js"></script>
     <script src="/js/app/models/task.js"></script>
@@ -112,22 +116,14 @@
 
     <!-- Materialize -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-    <script>
-      $(document).ready(function(){
 
-        $(".button-collapse").sideNav();
 
-        // Initialize collapsible (uncomment the line below if you use the dropdown variation)
-        $('.side-nav > li').click(function(){
-          $(".button-collapse").sideNav('hide');
-        });
+    <!-- Validator -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/validator/5.2.0/validator.min.js" charset="utf-8"></script>
 
-        $('.datepicker').pickadate({
-          selectMonths: true, // Creates a dropdown to control month
-          selectYears: 15 // Creates a dropdown of 15 years to control year
-        });
 
-      });
-    </script>
+
+
+
   </body>
 </html>
