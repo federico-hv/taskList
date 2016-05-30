@@ -19,23 +19,23 @@ var checkInput = function (title, body, date){
     return false;
   }
 
-  if(!validator.isLength(body, {min:5, max: 50})){
+  if(!validator.isLength(body, {min:5, max: 150})){
     $('#createModalError').html('Description error');
-    $('#createModal').html('The description must be between 5 and 50 characters');
+    $('#createModal').html('The description must be between 5 and 150 characters');
     $('#modal1').openModal();
     return false;
   }
 
   //Special chars validation
   //Test function returns true if the string contains a char that doesn't match the regexp
-  if(/[^a-zA-Z0-9\n\s]/.test(title)){
+  if(/[^a-zA-Z0-9\-\n\s]/.test(title)){
     $('#createModalError').html('Title error');
     $('#createModal').html('Please use only numbers and letters in the title');
     $('#modal1').openModal();
     return false;
   }
 
-  if(/[^a-zA-Z0-9\n\s]/.test(body)){
+  if(/[^a-zA-Z0-9\-\n\s]/.test(body)){
     $('#createModalError').html('Description error');
     $('#createModal').html('Please use only numbers and letters in the description');
     $('#modal1').openModal();
