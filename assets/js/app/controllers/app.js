@@ -22,7 +22,7 @@ function setAnimation(path){
   $('#container').removeClass('animated fadeInUpBig');
   $('#logo').removeClass('animated infinite bounce');
   $('#container').removeClass('animated fadeInLeftBig');
-  $('#container').removeClass('animated fadeInRightBig');
+  $('#container').removeClass('animated fadeInDownBig');
   $('#container').removeClass('animated fadeIn');
 
   $('#errorRowOne').removeClass('animated fadeInDownBig');
@@ -39,7 +39,7 @@ function setAnimation(path){
   }
 
   if(path === 'app.tasks.task'){
-    $('#container').addClass('animated fadeInRightBig');
+    $('#container').addClass('animated fadeInDownBig');
   }
 
   if(path === 'app.tasks.create'){

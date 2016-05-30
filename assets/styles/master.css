@@ -74,13 +74,6 @@
   animation:         fadeInLeftBig 0.4s !important; /* IE 10+, Fx 29+ */
 }
 
-.fadeInRightBig {
-  -webkit-animation: fadeInRightBig 0.4s !important; /* Safari 4+ */
-  -moz-animation:    fadeInRightBig 0.4s !important; /* Fx 5+ */
-  -o-animation:      fadeInRightBig 0.4s !important; /* Opera 12+ */
-  animation:         fadeInRightBig 0.4s !important; /* IE 10+, Fx 29+ */
-}
-
 .fadeInDownBig {
   -webkit-animation: fadeInDownBig 0.4s !important; /* Safari 4+ */
   -moz-animation:    fadeInDownBig 0.4s !important; /* Fx 5+ */
