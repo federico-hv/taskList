@@ -8,6 +8,8 @@ App.Router.map(function() {
     });
   });
 
+  this.route('error', { path: 'error'});
+
 });
 
 

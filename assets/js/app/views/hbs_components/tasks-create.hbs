@@ -1,6 +1,29 @@
-<h1>Create task</h1>
-{{input type="text" value=title }}
-<br>
-{{textarea type="text" value=body }}
-<br>
-<button {{action 'create'}}>Add Task</button>
+<div class="row">
+  <div class="col s12">
+    <h2 class="center-align titleClr">Create task</h2>
+  </div>
+  <div class="input-field col s9 push-s1 inputPadding">
+    <i class="material-icons prefix">title</i>
+    {{input id="title_create" type="text" value=title min-legnth="3" max-length="20" }}
+    {{#unless title}}
+      <label for="title">Title</label>
+    {{/unless}}
+  </div>
+  <div class="input-field col s9 push-s1 inputPadding">
+    <i class="material-icons prefix">description</i>
+    {{textarea id="description_create" type="text" value=body class="materialize-textarea" length="50" }}
+    {{#unless description}}
+    <label for="description">Description</label>
+    {{/unless}}
+  </div>
+  <div class="input-field col s9 push-s1 inputPadding">
+    <i class="material-icons prefix">date_range</i>
+    {{input id="datePic" type="date" value=date class="datepicker" style="position: relative; z-index: 100000;"}}
+  </div>
+  <div class="col s6 center-align">
+    <button class="btn-floating btn-small waves-effect waves-light btn red accent-2 z-depth-5 hoverable" {{action 'cancel'}}><i class="material-icons">delete</i></button>
+  </div>
+  <div class="col s6 center-align">
+    <button class="btn-floating btn-small waves-effect waves-light z-depth-5 hoverable" {{action 'create'}}><i class="material-icons">done</i></button>
+  </div>
+</div>

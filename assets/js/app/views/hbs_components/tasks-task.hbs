@@ -1,3 +1,29 @@
-<h1>Task Detail</h1>
-<input type="text" value="{{model.title}}" />
-<textarea>{{model.body}}</textarea>
+<div id="detailRow" class="row">
+  <div class="col s12">
+    <h1 class="center-align titleClr">Task</h1>
+  </div>
+  <div id="titleDetail" class="input-field col s9 push-s1 inputPadding">
+      <i class="material-icons prefix">mode_edit</i>
+      {{input id="ti_detail" type="text" value=model.title }}
+      {{#unless model.title}}
+        <label for="title">Title</label>
+      {{/unless}}
+  </div>
+  <div class="input-field col s9 push-s1 inputPadding">
+    <i class="material-icons prefix">comment</i>
+    {{textarea id="desc_detail" value=model.body class="materialize-textarea"}}
+    {{#unless model.body}}
+      <label for="description">Description</label>
+    {{/unless}}
+  </div>
+  <div class="input-field col s9 push-s1 inputPadding">
+    <i class="material-icons prefix">date_range</i>
+    {{input id="date_detail" type="text" value=model.date class="datepicker"}}
+  </div>
+  <div class="col s6 center-align">
+    <button class="btn-floating btn-small waves-effect waves-light btn red accent-2 z-depth-5 hoverable" {{action 'cancel'}}><i class="material-icons">undo</i></button>
+  </div>
+  <div class="col s6 center-align">
+    <button class="btn-floating btn-small waves-effect waves-light z-depth-5 hoverable" {{action 'update' model}}><i class="material-icons">save</i></button>
+  </div>
+</div>

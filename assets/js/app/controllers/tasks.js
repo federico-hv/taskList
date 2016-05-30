@@ -9,7 +9,7 @@ App.AppTasksIndexController = Ember.Controller.extend({
         console.log('Task Deleted')
       })
       .catch(function(err){
-        console.log('Error: ', err);
+        that.transitionToRoute('error');
       });
     }
   }
@@ -22,18 +22,17 @@ App.AppTasksCreateController = Ember.Controller.extend({
   date: '',
   actions: {
     create: function(){
-
-      console.log('MESSAGE: ');
-      console.log(this.get('oneWay'));
-
-      var ti = this.get('title');
-      var bo = this.get('body');
-      var da = this.get('date');
-
-      debugger;
-
-
       var that = this;
+      var ti   = this.get('title').trim().capitalize();
+      var bo   = this.get('body').trim().capitalize();
+      var da   = this.get('date').trim();
+
+
+      if(!checkInput(ti, bo, da)){
+        return false;
+      }
+
+
 
       /**
        * Check if not empty in both [MINLENGTH <= 3]
@@ -72,6 +71,14 @@ App.AppTasksCreateController = Ember.Controller.extend({
 App.AppTasksTaskController = Ember.Controller.extend({
   actions: {
     update: function(model){
+      var ti   = model.get('title').trim().capitalize();
+      var bo   = model.get('body').trim().capitalize();
+      var da   = model.get('date').trim();
+
+
+      if(!checkInput(ti, bo, da)){
+        return false;
+      }
 
       //Use this.model.get() to validate
       var that = this;
