@@ -1,5 +1,5 @@
 App.TaskAdapter = DS.RESTAdapter.extend({
-  host: 'http://localhost:1337',
+  host: 'http://ember.approveit.biz',
   primaryKey: 'id',
   pathForType: function(type) {
     var camelized = Ember.String.camelize(type);
